@@ -4,6 +4,10 @@
 #include <cstdlib>
 
 template<typename T> class Bag{
+private:
+size_t count;
+T item[20];
+
 public:
 
   Bag();

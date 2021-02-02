@@ -47,7 +47,7 @@ template <typename T> void Bag<T>::clear() {
 
 template <typename T> std::size_t Bag<T>::getFrequencyOf(const T& entry) const { 
     size_t frequency = 0;
-    for ( int i = 1; i < 20;i++){
+    for ( int i = 0; i < 20;i++){
         if ( item[i]== entry)
         frequency++;
     }

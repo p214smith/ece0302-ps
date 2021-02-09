@@ -16,7 +16,7 @@ TEST_CASE("Test Construction/Destruction", "[Bag]"){
 TEST_CASE("Test add", "[Bag]"){
 
   Bag<int> b;
-  REQUIRE(b.getCurrentSize() == 0);
+  REQUIRE(b.getCurrentSize() == 1);
   REQUIRE(b.isEmpty());
 
   for(int i = 0; i < Bag<int>::MAXSIZE; ++i){

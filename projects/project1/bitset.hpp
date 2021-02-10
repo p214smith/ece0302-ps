@@ -1,48 +1,53 @@
 #ifndef BITSET_HPP
 #define BITSET_HPP
 
+#include <string>
+
 class Bitset{
 public:
 
-  // TODO COMMENT
+  // DEFAULT CONSTRUCTOR
   Bitset();
 
-  // TODO COMMENT
+  // CONSTRUCTOR THAT SETS SIZE OF BITSET
   Bitset(intmax_t size);
 
-  // TODO COMMENT
+  // CONSTRUCTOR THAT CREATES BITSET OF VALUES FROM STRING 
   Bitset(const std::string & value);
 
-  // TODO COMMENT
+  // DESTRUCTOR
   ~Bitset();
 
   Bitset(const Bitset & ) = delete;
   Bitset & operator=(const Bitset &) = delete;
 
-  // TODO COMMENT
+  // GETS SIZE OF BITSET
   intmax_t size() const;
 
-  // TODO COMMENT
+  // CHECKS VALIDITY OF BITSET
   bool good() const;
 
-  // TODO COMMENT
+  // SETS BIT AT INDEX TO TRUE
   void set(intmax_t index);
 
-  // TODO COMMENT
+  // SETS BIT AT INDEX TO FALSE
   void reset(intmax_t index);
 
-  // TODO COMMENT
+  // TOGGLES BIT TO TRUE IF FALSE AND FALSE IF TRUE 
   void toggle(intmax_t index);
 
-  // TODO COMMENT
+  // CHECKS if a SPECIFIC BIT is set
   bool test(intmax_t index);
 
-  // TODO COMMENT
+  // RETURNS BITSET AS A STRING
   std::string asString() const;
 
 private:
-
-  // TODO
+  
+  //BITSET MEMBER VARIABLE
+  int * m_bitSet;
+  int m_bits;
+  bool m_test;
 };
 
 #endif

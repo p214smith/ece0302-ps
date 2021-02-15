@@ -42,7 +42,9 @@ public:
 
 private:
 
-  // TODO
+  std::size_t size;  
+   int m_max;
+   T *m_Bag;
 };
 
 #include "dynamic_bag.tpp"

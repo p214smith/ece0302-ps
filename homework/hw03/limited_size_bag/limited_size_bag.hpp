@@ -39,10 +39,14 @@ public:
 
   // check if item is in the bag
   bool contains(const T& item) const;
+  
+  static const std::size_t MAXSIZE = 100;
 
 private:
 
-  // TODO
+  std::size_t size;
+  T* m_Bag;
+  
 };
 
 #include "limited_size_bag.tpp"

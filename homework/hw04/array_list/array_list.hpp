@@ -43,8 +43,9 @@ public:
 
 private:
 
-  // TODO
-  
+  T *m_arrayList;
+  std::size_t m_size;
+  std::size_t m_max;
 };
 
 #include "array_list.tpp"

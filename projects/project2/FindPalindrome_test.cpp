@@ -9,6 +9,13 @@ TEST_CASE( "Test FindPalindrome add a non-allowable word", "[FindPalindrome]" )
 {
 	INFO("Hint: add a single non-allowable word");
 	FindPalindrome b;
-	REQUIRE(!b.add("kayak1"));
+	std::vector<std::string> s,k;
+	k.push_back("a");
+	s.push_back("a");
+	REQUIRE(b.add("kayak") == true);
+	REQUIRE(b.cutTest1(s)==true);
+	REQUIRE(b.cutTest2(s,k)==true);
+	REQUIRE(b.number()==1);
+	REQUIRE(b.add("aa")== true);
 }
 

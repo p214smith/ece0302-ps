@@ -41,12 +41,12 @@ TEST_CASE("Testing insert", "[sorted linked list]") {
   char c = 'a';
   while (c <= 'z') {
     lst.insert(c);
-    ++c;
+    c++;
   }
   REQUIRE(lst.getLength() == 26);
 
   for (int i = 0; i < 26; ++i) {
-    REQUIRE(lst.getEntry(i) == 'a' + i);
+   REQUIRE(lst.getEntry(i) == 'a' + i);
   }
 }
 

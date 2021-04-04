@@ -40,13 +40,38 @@ std::size_t SortedList<T, L>::getLength()
 template <typename T, typename L>
 void SortedList<T, L>::insert(const T& item)
 {
-  // TODO
+  std::size_t i = 0;
+  if (plist.getLength() == 0)
+  plist.insert(0,item);
+  else
+  {
+   for (i =0; i <plist.getLength();i++)
+    {
+      if (item <= plist.getEntry(i)){
+      plist.insert(i,item);
+      break;
+      }
+      else if (i = plist.getLength())
+      plist.insert(i,item);
+    }
+   
+
+    
+  }
 }
 
 template <typename T, typename L>
 void SortedList<T, L>::remove(const T& item)
 {
-  // TODO
+  if(plist.isEmpty()) throw std::range_error("empty list in remove");
+  
+  for (std::size_t i = 0; i< plist.getLength();i++)
+    {
+      if (item == plist.getEntry(i)){
+      plist.remove(i);
+      break;
+      }
+    }
 }
 
 template <typename T, typename L>
@@ -70,6 +95,8 @@ T SortedList<T, L>::getEntry(std::size_t position)
 template <typename T, typename L>
 long int SortedList<T, L>::getPosition(const T& newValue)
 {
-  // TODO
-  return 0;
+  for (long int i = 0; i < plist.getLength();i++){
+    if (newValue >= plist.getEntry(i))
+    return i;
+  }
 }

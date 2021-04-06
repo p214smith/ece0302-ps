@@ -266,7 +266,10 @@ void BinaryTree<TreeItemType, FunctionType>::preorder(
     NodeType* treePtr, FunctionType visit)
 {
    if (treePtr != 0) {
-        // TODO
+        visit(treePtr->item);
+        preorder(treePtr->leftChildPtr,visit);
+        preorder(treePtr->rightChildPtr,visit);
+
    }
 };
 
@@ -275,7 +278,9 @@ void BinaryTree<TreeItemType, FunctionType>::inorder(
     NodeType* treePtr, FunctionType visit)
 {
     if (treePtr != 0) {
-        // TODO
+        inorder(treePtr->leftChildPtr,visit);
+        visit(treePtr->item);
+        inorder(treePtr->rightChildPtr,visit);
     }
 };
 
@@ -284,6 +289,8 @@ void BinaryTree<TreeItemType, FunctionType>::postorder(
     NodeType* treePtr, FunctionType visit)
 {
     if (treePtr != 0) {
-        // TODO
+        postorder(treePtr->leftChildPtr,visit);
+        postorder(treePtr->rightChildPtr,visit);
+        visit(treePtr->item);
     }
 };

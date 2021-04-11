@@ -101,8 +101,33 @@ template <typename KeyType, typename ItemType>
 bool BinarySearchTree<KeyType, ItemType>::insert(
     const KeyType& key, const ItemType& item)
 {
-    // TODO 
+     if (root == 0){
+         root = new Node<KeyType, ItemType>;
+         root->key = key;
+         root->data = item;
+         return true;
+     }
+    else{
+     Node<KeyType, ItemType>* curr;
+    Node<KeyType, ItemType>* curr_parent;
+    search(key, curr, curr_parent);
+    if (curr->key == key)
     return false;
+    else if ( key < curr->key){
+    curr_parent = new Node<KeyType, ItemType>;
+    curr_parent->key = key;
+    curr_parent->data = item;
+    curr->left = curr_parent;
+    return true;
+    }
+    else{
+    curr_parent = new Node<KeyType, ItemType>;
+    curr_parent->key = key;
+    curr_parent->data = item;
+    curr->right = curr_parent;
+    return true;
+    }
+}
 }
 
 template <typename KeyType, typename ItemType>
@@ -136,19 +161,78 @@ bool BinarySearchTree<KeyType, ItemType>::remove(KeyType key)
     if (isEmpty())
         return false; // empty tree
 
-    // TODO
+    Node<KeyType, ItemType>* curr;
+    Node<KeyType, ItemType>* curr_parent;
+    search(key, curr, curr_parent);
 
 
     // case one thing in the tree
-
+    if (curr == root)
+    {
+        delete root;
+        root = 0;
+        return true;
+    }
     // case, found deleted item at leaf
-
+    else if ( curr->left == 0 && curr->right == 0)
+    {
+        if ( curr->key > curr_parent->key)
+        {
+            delete curr;
+            curr_parent->right =  0;
+            return true;
+        }
+        else 
+        {
+            delete curr;
+            curr_parent->left = 0;
+            return true; 
+        }
+    }
     // case, item to delete has only a right child
+    else if ( curr->left == 0)
+    {
+         if ( curr->key > curr_parent->key)
+        {
+            curr_parent->right =  curr->right;
+            delete curr;
+            return true;
+        }
+        else 
+        {
+            curr_parent->left = curr->right;
+            delete curr;
+            return true;
+        }
+    }
 
     // case, item to delete has only a left child
-
+    else if ( curr->right == 0)
+    {
+         if ( curr->key > curr_parent->key)
+        {
+            curr_parent->right =  curr->left;
+            delete curr;
+            return true;
+        }
+        else 
+        {
+            curr_parent->left = curr->left;
+            delete curr;
+            return true;
+        }
+    }
     // case, item to delete has two children
-
+    else
+    {
+        curr_parent = curr->right;
+        while (curr_parent->left != 0)
+        curr_parent = curr_parent->left;
+        curr->data = curr_parent->data;
+        delete curr_parent;
+        curr_parent = 0;
+        return true;
+    }
     return false; // default should never get here
 }
 
@@ -156,9 +240,21 @@ template <typename KeyType, typename ItemType>
 void BinarySearchTree<KeyType, ItemType>::inorder(Node<KeyType, ItemType>* curr,
     Node<KeyType, ItemType>*& in, Node<KeyType, ItemType>*& parent)
 {
-    // TODO 
-    // move right once
-    // move left as far as possible
+    if (parent->left != 0)
+    {
+        in = parent->left;
+        while (in->left != 0)
+        in = in->left;
+    }
+    else if (parent->right != 0)
+    {
+        curr = parent->right;
+        in = curr->left;
+        while ( in->left != 0)
+        in = in->left;
+    }
+    else 
+    in = parent;
 }
 
 template <typename KeyType, typename ItemType>
@@ -188,4 +284,36 @@ void BinarySearchTree<KeyType, ItemType>::search(KeyType key,
                 break;
         }
     }
+}
+
+template<typename KeyType, typename ItemType>
+void BinarySearchTree<KeyType, ItemType>::treeSort(ItemType arr[], int size) {
+    // TODO: check for duplicate items in the input array
+    int i, j;
+    for (i = 0; i < size-1; i ++){
+        j = i + 1;
+        while( j < size)
+        {
+            if (arr[i]==arr[j])
+            return;
+            j++;
+        }
+    }
+    // TODO: use the tree to sort the array items
+    for (i = 0 ; i < size ; i++){
+    KeyType k = arr[i];
+    insert(k,arr[i]);}
+    // TODO: overwrite input array values with sorted values
+     Node<KeyType, ItemType>* curr = 0;
+     Node<KeyType, ItemType>* ino = 0;
+    Node<KeyType, ItemType>* curr_parent = root;
+
+    for(i = 0; i < size; i++)
+    {
+        inorder(curr,ino, curr_parent);
+        arr[i] = ino->data;
+        remove(ino->key);
+    }
+    
+    
 }
